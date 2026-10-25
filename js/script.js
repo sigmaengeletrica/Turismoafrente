@@ -257,6 +257,39 @@
   });
 
 
+
+  // Carrossel horizontal de ofertas.
+  const offerTrack = document.getElementById("offer-track");
+  document.querySelector(".carousel-prev")?.addEventListener("click", () => {
+    offerTrack?.scrollBy({left: -Math.max(260, offerTrack.clientWidth * 0.8), behavior: "smooth"});
+  });
+  document.querySelector(".carousel-next")?.addEventListener("click", () => {
+    offerTrack?.scrollBy({left: Math.max(260, offerTrack.clientWidth * 0.8), behavior: "smooth"});
+  });
+
+  // Abrir/fechar detalhes da promoção em uma janela sobre o site.
+  const offerModal = document.getElementById("offer-modal");
+  document.querySelectorAll("[data-offer-open]").forEach(button => {
+    button.addEventListener("click", () => {
+      if (!offerModal) return;
+      offerModal.hidden = false;
+      document.body.classList.add("offer-modal-open");
+      offerModal.querySelector("[data-offer-close]")?.focus();
+    });
+  });
+  offerModal?.querySelectorAll("[data-offer-close]").forEach(button => {
+    button.addEventListener("click", () => {
+      offerModal.hidden = true;
+      document.body.classList.remove("offer-modal-open");
+    });
+  });
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && offerModal && !offerModal.hidden) {
+      offerModal.hidden = true;
+      document.body.classList.remove("offer-modal-open");
+    }
+  });
+
   // Mensagem pronta para consultar o pacote em destaque.
   document.querySelectorAll(".package-whatsapp").forEach(button => {
     const hotel = button.dataset.hotel || "hospedagem a confirmar";
