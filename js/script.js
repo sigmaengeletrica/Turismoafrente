@@ -258,45 +258,112 @@
 
 
 
-  // Carrossel horizontal de ofertas.
+  // Ofertas do carrossel vêm de ofertas.json, sem misturar dados ao script principal.
+  const offerSection = document.getElementById("ofertas-especiais");
   const offerTrack = document.getElementById("offer-track");
+  const offerModal = document.getElementById("offer-modal");
+  const moneyOffer = value => {
+    const n = Number(String(value ?? "").replace(/\./g, "").replace(",", "."));
+    return Number.isFinite(n) ? n.toLocaleString("pt-BR", {style:"currency", currency:"BRL"}) : String(value ?? "");
+  };
+  const offerImage = offer => {
+    const slot = Math.max(1, Math.min(3, Number(offer.imageSlot || offer.slot || 1)));
+    return `imagens/capas/Oferta${slot}.jpg`;
+  };
+  const safeText = (parent, selector, value) => {
+    const el = parent.querySelector(selector);
+    if (el) el.textContent = value || "";
+  };
+  function openOffer(offer) {
+    if (!offerModal) return;
+    const image = offerImage(offer);
+    const hero = document.getElementById("offer-modal-hero");
+    if (hero) {
+      hero.style.backgroundImage = `linear-gradient(90deg,rgba(4,28,52,.82),rgba(4,28,52,.18)),url("${image}")`;
+      hero.style.backgroundSize = "cover";
+      hero.style.backgroundPosition = "center";
+    }
+    safeText(offerModal, "#offer-modal-destination", offer.destination);
+    safeText(offerModal, "#offer-modal-title", offer.title);
+    safeText(offerModal, "#offer-modal-period", `${offer.period || ""}${offer.nights ? " · " + offer.nights + " noites" : ""}${offer.price ? " · a partir de " + moneyOffer(offer.price) : ""}`);
+    safeText(offerModal, "#offer-modal-description", offer.description || "");
+    safeText(offerModal, "#offer-modal-disclaimer", offer.disclaimer || "Valores sujeitos a alteração e disponibilidade.");
+    const list = document.getElementById("offer-modal-inclusions");
+    if (list) {
+      list.replaceChildren();
+      String(offer.inclusions || "").split(/\r?\n/).map(x => x.trim()).filter(Boolean).forEach(item => {
+        const li = document.createElement("li"); li.textContent = "✓ " + item; list.append(li);
+      });
+      if (!list.children.length) {
+        const li = document.createElement("li"); li.textContent = "Consulte os detalhes pelo WhatsApp."; list.append(li);
+      }
+    }
+    const waLink = document.getElementById("offer-modal-whatsapp");
+    if (waLink) {
+      const message = `Olá! Tenho interesse na oferta "${offer.title}" para ${offer.destination}, período ${offer.period}. Preço anunciado: ${moneyOffer(offer.price)}. Gostaria de confirmar disponibilidade e condições.`;
+      waLink.href = wa(message);
+    }
+    offerModal.hidden = false;
+    document.body.classList.add("offer-modal-open");
+    offerModal.querySelector("[data-offer-close]")?.focus();
+  }
+  function renderOfferCards(allOffers) {
+    if (!offerSection || !offerTrack) return;
+    const published = allOffers.filter(o => o && (o.status === "published" || o.status === "publicada")).slice(0, 3);
+    offerTrack.replaceChildren();
+    if (!published.length) {
+      offerSection.hidden = true;
+      return;
+    }
+    offerSection.hidden = false;
+    published.forEach(offer => {
+      const button = document.createElement("button");
+      button.type = "button"; button.className = "offer-tile";
+      const imageWrap = document.createElement("span"); imageWrap.className = "offer-tile-image";
+      const img = document.createElement("img"); img.src = offerImage(offer); img.alt = offer.title || "Oferta de viagem"; img.loading = "lazy";
+      img.onerror = () => { imageWrap.classList.add("inspiration-image"); img.remove(); };
+      imageWrap.append(img);
+      const badge = document.createElement("span"); badge.className = "offer-badge"; badge.textContent = "🚨 IMPERDÍVEL"; imageWrap.append(badge);
+      const copy = document.createElement("span"); copy.className = "offer-tile-copy";
+      const destination = document.createElement("small"); destination.textContent = offer.destination || "";
+      const title = document.createElement("strong"); title.textContent = offer.title || "Oferta de viagem";
+      const period = document.createElement("span"); period.textContent = `${offer.period || ""}${offer.nights ? " · " + offer.nights + " noites" : ""}`;
+      const price = document.createElement("b"); price.textContent = offer.price ? `A partir de ${moneyOffer(offer.price)} por pessoa` : "Consulte o preço";
+      const cta = document.createElement("span"); cta.className = "offer-tile-cta"; cta.textContent = "Ver promoção →";
+      copy.append(destination, title, period, price, cta); button.append(imageWrap, copy);
+      button.addEventListener("click", () => openOffer(offer)); offerTrack.append(button);
+    });
+    // O cartão "Em breve" ocupa a última posição disponível, mas não aparece sem ofertas.
+    if (published.length < 3) {
+      const soon = document.createElement("button"); soon.type = "button"; soon.className = "offer-tile offer-coming-soon"; soon.disabled = true;
+      const imageWrap = document.createElement("span"); imageWrap.className = "offer-tile-image inspiration-image";
+      const badge = document.createElement("span"); badge.className = "offer-badge"; badge.textContent = "EM BREVE"; imageWrap.append(badge);
+      const copy = document.createElement("span"); copy.className = "offer-tile-copy";
+      const small = document.createElement("small"); small.textContent = "NOVAS EXPERIÊNCIAS";
+      const title = document.createElement("strong"); title.textContent = "Novos destinos em breve";
+      const desc = document.createElement("span"); desc.textContent = "Estamos preparando outras ofertas para você.";
+      const cta = document.createElement("span"); cta.className = "offer-tile-cta"; cta.textContent = "Acompanhe as novidades →";
+      copy.append(small, title, desc, cta); soon.append(imageWrap, copy); offerTrack.append(soon);
+    }
+  }
   document.querySelector(".carousel-prev")?.addEventListener("click", () => {
     offerTrack?.scrollBy({left: -Math.max(260, offerTrack.clientWidth * 0.8), behavior: "smooth"});
   });
   document.querySelector(".carousel-next")?.addEventListener("click", () => {
     offerTrack?.scrollBy({left: Math.max(260, offerTrack.clientWidth * 0.8), behavior: "smooth"});
   });
-
-  // Abrir/fechar detalhes da promoção em uma janela sobre o site.
-  const offerModal = document.getElementById("offer-modal");
-  document.querySelectorAll("[data-offer-open]").forEach(button => {
-    button.addEventListener("click", () => {
-      if (!offerModal) return;
-      offerModal.hidden = false;
-      document.body.classList.add("offer-modal-open");
-      offerModal.querySelector("[data-offer-close]")?.focus();
-    });
-  });
-  offerModal?.querySelectorAll("[data-offer-close]").forEach(button => {
-    button.addEventListener("click", () => {
-      offerModal.hidden = true;
-      document.body.classList.remove("offer-modal-open");
-    });
-  });
+  offerModal?.querySelectorAll("[data-offer-close]").forEach(button => button.addEventListener("click", () => {
+    offerModal.hidden = true; document.body.classList.remove("offer-modal-open");
+  }));
   document.addEventListener("keydown", event => {
     if (event.key === "Escape" && offerModal && !offerModal.hidden) {
-      offerModal.hidden = true;
-      document.body.classList.remove("offer-modal-open");
+      offerModal.hidden = true; document.body.classList.remove("offer-modal-open");
     }
   });
-
-  // Mensagem pronta para consultar o pacote em destaque.
-  document.querySelectorAll(".package-whatsapp").forEach(button => {
-    const hotel = button.dataset.hotel || "hospedagem a confirmar";
-    const price = button.dataset.price || "valor a confirmar";
-    const message = `Olá! Tenho interesse no pacote de Natal em Itacaré, de 19 a 25 de dezembro de 2026, com hospedagem no ${hotel}. O valor anunciado é ${price} por pessoa em quarto duplo. Gostaria de confirmar disponibilidade, preço atualizado e condições.`;
-    button.href = wa(message);
-  });
+  fetch("ofertas.json", {cache:"no-store"})
+    .then(response => { if (!response.ok) throw new Error("Arquivo ofertas.json não encontrado"); return response.json(); })
+    .then(data => renderOfferCards(Array.isArray(data) ? data : (Array.isArray(data.ofertas) ? data.ofertas : [])))
+    .catch(() => { if (offerSection) offerSection.hidden = true; });
 
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || navigator.connection?.saveData) {
     document.querySelectorAll("video[autoplay]").forEach(v => { v.pause(); v.removeAttribute("autoplay"); });
