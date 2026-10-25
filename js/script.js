@@ -144,14 +144,25 @@
       choose.className = "btn green";
       choose.textContent = "Solicitar este voo pelo WhatsApp";
       choose.addEventListener("click", () => {
-        const text = `Olá! Gostaria de cotar esta opção pela ${cfg.agencyName}.\n` +
-          `Origem: ${search.origin}\nDestino: ${search.destination}\n` +
-          `Ida: ${search.depart}${search.back ? "\nVolta: " + search.back : ""}\n` +
-          `Passageiros: ${search.passengers}\nClasse: ${search.cabin}\n` +
-          `Companhia: ${offer.owner?.name || "não informada"}\n` +
-          `Preço exibido: ${offer.total_currency || ""} ${offer.total_amount || "não informado"}\n` +
-          `Oferta: ${offer.id || "não informado"}\n` +
-          "Favor confirmar preço, disponibilidade e condições.";
+        const formatPrice = () => {
+          if (!offer.total_currency || offer.total_amount == null) return "não informado";
+          try {
+            return new Intl.NumberFormat("pt-BR", {
+              style: "currency",
+              currency: offer.total_currency
+            }).format(Number(offer.total_amount));
+          } catch (_) {
+            return `${offer.total_currency} ${offer.total_amount}`;
+          }
+        };
+        const text = `Olá! Gostaria de solicitar uma cotação de uma viagem.\\n\\n` +
+          `Detalhes da viagem:\\n` +
+          `Origem: ${search.origin}\\nDestino: ${search.destination}\\n` +
+          `Ida: ${formatDate(search.depart)}${search.back ? "\\nVolta: " + formatDate(search.back) : ""}\\n` +
+          `Passageiros: ${search.passengers}\\nClasse: ${search.cabin}\\n` +
+          `Companhia aérea: ${offer.owner?.name || "não informada"}\\n` +
+          `Preço encontrado: ${formatPrice()}\\n\\n` +
+          "Por favor, confirme o preço atualizado, a disponibilidade e as condições da tarifa.";
         if (phone) window.open(wa(text), "_blank", "noopener,noreferrer");
         else alert(text);
       });
