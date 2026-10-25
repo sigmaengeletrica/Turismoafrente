@@ -1,6 +1,19 @@
 {
   "ofertas": [
     {
+      "id": "oferta-1792960202588",
+      "title": "ALL INCLUSIVE VILA GALÉ CUMBUCO",
+      "destination": "Fortaleza",
+      "period": "3 a 9 de março de 2027",
+      "price": "6.744,84",
+      "nights": "6",
+      "imageSlot": "1",
+      "description": "Tudo All inclusive",
+      "inclusions": "✈️ Passagem aérea de ida e volta – POA/FORTALEZA/POA\n🕐 Ida às 09:05, chegando em Fortaleza às 17:05 - 1 conexão\n🕐 Saí às 17:45 chegando em Porto Alegre às 00:15 - 1 conexão\n🧳 Bagagem de mão de 10kg por pessoa + item pessoal (bolsa/mochila);\n🚐 Transfer Aeroporto/ Hotel Vila Galé Cumbuco / Aeroporto;\n🏨 6 noites de hospedagem no Vila Galé Cumbuco;\n🍽️ All inclusive.",
+      "disclaimer": "Valores sujeitos a alteração e disponibilidade sem aviso prévio.",
+      "status": "published"
+    },
+    {
       "id": "itacare-natal-2026",
       "title": "Natal em Itacaré",
       "destination": "Itacaré, Bahia",
