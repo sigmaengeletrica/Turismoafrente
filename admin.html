@@ -57,7 +57,8 @@
           <div class="admin-field"><label for="period">Período *</label><input id="period" required placeholder="10 a 17 de janeiro de 2027"></div>
           <div class="admin-field"><label for="price">Preço inicial (R$) *</label><input id="price" required inputmode="decimal" placeholder="2999,90"></div>
           <div class="admin-field"><label for="nights">Noites</label><input id="nights" type="number" min="0" placeholder="7"></div>
-          <div class="admin-field full"><label for="image">URL da imagem</label><input id="image" type="url" placeholder="https://..."></div>
+          <div class="admin-field"><label for="imageSlot">Foto da oferta</label><select id="imageSlot"><option value="1">Oferta1.jpg</option><option value="2">Oferta2.jpg</option><option value="3">Oferta3.jpg</option></select></div>
+          <div class="admin-field full"><p class="fine">As fotos ficam em <code>imagens/capas/</code>. Substitua Oferta1.jpg, Oferta2.jpg ou Oferta3.jpg no GitHub mantendo o nome do arquivo.</p></div>
           <div class="admin-field full"><label for="description">Descrição curta</label><textarea id="description" placeholder="Descreva a experiência e os diferenciais."></textarea></div>
           <div class="admin-field full"><label for="inclusions">O que está incluído (um item por linha)</label><textarea id="inclusions" placeholder="Passagem aérea&#10;Hospedagem&#10;Café da manhã"></textarea></div>
           <div class="admin-field full"><label for="disclaimer">Observação de preço</label><input id="disclaimer" value="Valores sujeitos a alteração e disponibilidade sem aviso prévio."></div>
@@ -78,7 +79,7 @@
         <button class="btn blue" id="import-json" type="button">Importar JSON</button>
         <input id="import-file" type="file" accept=".json,application/json" hidden>
       </div>
-      <p class="fine">Exportar cria um arquivo com os dados cadastrados. A publicação automática será configurada na próxima etapa.</p>
+      <p class="fine">Exporta o arquivo ofertas.json. Para atualizar o site, envie esse JSON e as fotos necessárias para imagens/capas/ ao GitHub. As imagens usam nomes fixos.</p>
     </aside>
   </div>
 </div>
@@ -88,11 +89,11 @@
   const KEY = "turismo-a-frente-admin-offers-v1";
   const $ = id => document.getElementById(id);
   const form = $("offer-form");
-  const fields = ["title","destination","period","price","nights","image","description","inclusions","disclaimer","status"];
+  const fields = ["title","destination","period","price","nights","imageSlot","description","inclusions","disclaimer","status"];
   const initialOffer = {
     id:"itacare-natal-2026", title:"Natal em Itacaré", destination:"Itacaré, Bahia",
-    period:"19 a 25 de dezembro de 2026", price:"3230,31", nights:"6",
-    image:"", description:"Pacote de Natal com passagem aérea, traslados, hospedagem e café da manhã.",
+    period:"19 a 25 de dezembro de 2026", price:"3230,31", nights:"6", imageSlot:"1",
+    description:"Pacote de Natal com passagem aérea, traslados, hospedagem e café da manhã.",
     inclusions:"Passagem aérea de ida e volta — Porto Alegre/Ilhéus/Porto Alegre\nIda às 10h25, chegada às 15h40 — 1 conexão\nRetorno às 10h00, chegada às 16h15 — 1 conexão\nBagagem de mão de 10 kg por pessoa + item pessoal\nTransfer de chegada e saída\n6 noites de hospedagem\nCafé da manhã",
     disclaimer:"Valores sujeitos a alteração e disponibilidade sem aviso prévio.", status:"published"
   };
@@ -138,15 +139,15 @@
   $("new-offer").onclick=()=>{resetForm();window.scrollTo({top:0,behavior:"smooth"});};
   $("reset-form").onclick=resetForm;
   $("export-json").onclick=()=>{
-    const blob=new Blob([JSON.stringify(offers,null,2)],{type:"application/json"});
+    const blob=new Blob([JSON.stringify({ofertas:offers},null,2)],{type:"application/json"});
     const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download="ofertas-turismo-a-frente.json";a.click();URL.revokeObjectURL(url);
   };
   $("import-json").onclick=()=>$("import-file").click();
   $("import-file").addEventListener("change",async e=>{
     const file=e.target.files[0];if(!file)return;
-    try{const parsed=JSON.parse(await file.text());if(!Array.isArray(parsed))throw new Error("Formato inválido");
+    try{const parsed=JSON.parse(await file.text());const imported=Array.isArray(parsed)?parsed:parsed.ofertas;if(!Array.isArray(imported))throw new Error("Formato inválido");
       if(!confirm("Importar vai substituir as ofertas atuais neste navegador. Continuar?"))return;
-      offers=parsed;saveAll();render();$("status-message").textContent="Arquivo importado.";
+      offers=imported;saveAll();render();$("status-message").textContent="Arquivo importado.";
     }catch(err){alert("Não foi possível importar. Confira se o arquivo JSON está válido.");}
     e.target.value="";
   });

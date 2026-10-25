@@ -1,0 +1,17 @@
+{
+  "ofertas": [
+    {
+      "id": "itacare-natal-2026",
+      "title": "Natal em Itacaré",
+      "destination": "Itacaré, Bahia",
+      "period": "19 a 25 de dezembro de 2026",
+      "price": "3230,31",
+      "nights": "6",
+      "imageSlot": "1",
+      "description": "Pacote de Natal com passagem aérea, traslados, hospedagem e café da manhã.",
+      "inclusions": "Passagem aérea de ida e volta — Porto Alegre/Ilhéus/Porto Alegre\nIda às 10h25, chegada às 15h40 — 1 conexão\nRetorno às 10h00, chegada às 16h15 — 1 conexão\nBagagem de mão de 10 kg por pessoa + item pessoal\nTransfer de chegada e saída\n6 noites de hospedagem\nCafé da manhã",
+      "disclaimer": "Valores sujeitos a alteração e disponibilidade sem aviso prévio.",
+      "status": "published"
+    }
+  ]
+}
