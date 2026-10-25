@@ -1,2 +1,6 @@
-// Configure o número do WhatsApp antes de publicar. Formato: código do país + DDD + número, somente dígitos.
-window.TURISMO_CONFIG = { whatsapp: "", agencyName: "Turismo a Frente" };
+// Configuração pública do site. Nunca coloque aqui o token da Duffel.
+window.TURISMO_CONFIG = {
+  whatsapp: "5554991503391",
+  agencyName: "Turismo a Frente",
+  flightsApi: "https://turismo-api-voos.onrender.com"
+};
