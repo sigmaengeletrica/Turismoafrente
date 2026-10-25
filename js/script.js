@@ -155,13 +155,13 @@
             return `${offer.total_currency} ${offer.total_amount}`;
           }
         };
-        const text = `Olá! Gostaria de solicitar uma cotação de uma viagem.\\n\\n` +
-          `Detalhes da viagem:\\n` +
-          `Origem: ${search.origin}\\nDestino: ${search.destination}\\n` +
-          `Ida: ${formatDate(search.depart)}${search.back ? "\\nVolta: " + formatDate(search.back) : ""}\\n` +
-          `Passageiros: ${search.passengers}\\nClasse: ${search.cabin}\\n` +
-          `Companhia aérea: ${offer.owner?.name || "não informada"}\\n` +
-          `Preço encontrado: ${formatPrice()}\\n\\n` +
+        const text = `Olá! Gostaria de solicitar uma cotação de uma viagem.\n\n` +
+          `Detalhes da viagem:\n` +
+          `Origem: ${search.origin}\nDestino: ${search.destination}\n` +
+          `Ida: ${formatDate(search.depart)}${search.back ? "\nVolta: " + formatDate(search.back) : ""}\n` +
+          `Passageiros: ${search.passengers}\nClasse: ${search.cabin}\n` +
+          `Companhia aérea: ${offer.owner?.name || "não informada"}\n` +
+          `Preço encontrado: ${formatPrice()}\n\n` +
           "Por favor, confirme o preço atualizado, a disponibilidade e as condições da tarifa.";
         if (phone) window.open(wa(text), "_blank", "noopener,noreferrer");
         else alert(text);
