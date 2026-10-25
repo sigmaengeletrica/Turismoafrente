@@ -256,6 +256,15 @@
     else alert("Configure o WhatsApp em js/config.js.");
   });
 
+
+  // Mensagem pronta para consultar o pacote em destaque.
+  document.querySelectorAll(".package-whatsapp").forEach(button => {
+    const hotel = button.dataset.hotel || "hospedagem a confirmar";
+    const price = button.dataset.price || "valor a confirmar";
+    const message = `Olá! Tenho interesse no pacote de Natal em Itacaré, de 19 a 25 de dezembro de 2026, com hospedagem no ${hotel}. O valor anunciado é ${price} por pessoa em quarto duplo. Gostaria de confirmar disponibilidade, preço atualizado e condições.`;
+    button.href = wa(message);
+  });
+
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || navigator.connection?.saveData) {
     document.querySelectorAll("video[autoplay]").forEach(v => { v.pause(); v.removeAttribute("autoplay"); });
   }
