@@ -32,7 +32,7 @@
                             <!-- CONTEÚDO PRINCIPAL -->
                             <!-- DESTAQUE INICIAL: vídeo de fundo e chamada principal -->
                             <section class="hero" id="inicio">
-                              <video autoplay muted loop playsinline webkit-playsinline preload="metadata" poster="imagens/capas/banner-principal.svg">
+                              <video autoplay muted loop playsinline webkit-playsinline preload="auto" poster="imagens/capas/banner-principal.svg">
                 <source src="videos/video3.mp4" type="video/mp4">
                               </video>
                               <div class="shade">
@@ -187,7 +187,7 @@
                                                                                                                                       <!-- VÍDEO 1: atrações internacionais -->
                                                                                                                                       <section class="video-row" id="experiencias">
                                                                                                                                         <div class="video">
-                                                                                                                                          <video autoplay muted loop playsinline webkit-playsinline preload="metadata" poster="imagens/capas/internacionais.svg">
+                                                                                                                                          <video autoplay muted loop playsinline webkit-playsinline preload="auto" poster="imagens/capas/internacionais.svg">
                 <source src="videos/video1.mp4" type="video/mp4">
                                                                                                                                           </video>
                                                                                                                                         </div>
@@ -201,7 +201,7 @@
                                                                                                                                               <!-- VÍDEO 2: atrações brasileiras -->
                                                                                                                                               <section class="video-row reverse">
                                                                                                                                                 <div class="video">
-                                                                                                                                                  <video autoplay muted loop playsinline webkit-playsinline preload="metadata" poster="imagens/capas/brasil.svg">
+                                                                                                                                                  <video autoplay muted loop playsinline webkit-playsinline preload="auto" poster="imagens/capas/brasil.svg">
                 <source src="videos/video2.mp4" type="video/mp4">
                                                                                                                                                   </video>
                                                                                                                                                 </div>
@@ -228,7 +228,7 @@
                                                                                                                                                               </section>
                                                                                                                                                               <!-- VÍDEO 4: meios de transporte -->
                                                                                                                                                               <section class="transport">
-                                                                                                                                                                <video autoplay muted loop playsinline webkit-playsinline preload="metadata" poster="imagens/capas/transportes.svg">
+                                                                                                                                                                <video autoplay muted loop playsinline webkit-playsinline preload="auto" poster="imagens/capas/transportes.svg">
                 <source src="videos/video4.mp4" type="video/mp4">
                                                                                                                                                                 </video>
                                                                                                                                                                 <div class="transport-shade">
@@ -326,7 +326,51 @@
   </svg>
 </a>
                                                                                                                                                                                                                                       <!-- CONFIGURAÇÕES e funções JavaScript -->
-                                                                                                                                                                                                                                      <script src="js/config.js">
+                                                                                                                                                                                                                                  
+<script>
+  // Compatibilidade dos quatro vídeos de experiências com Safari/iPhone.
+  document.addEventListener("DOMContentLoaded", function () {
+    const videos = document.querySelectorAll(
+      '.video-row video, .transport > video'
+    );
+
+    videos.forEach(function (video) {
+      video.muted = true;
+      video.defaultMuted = true;
+      video.playsInline = true;
+      video.setAttribute('muted', '');
+      video.setAttribute('playsinline', '');
+      video.setAttribute('webkit-playsinline', '');
+
+      function tryPlayback() {
+        const result = video.play();
+        if (result && typeof result.catch === 'function') {
+          result.catch(function () {
+            // Se o iPhone bloquear autoplay, permite iniciar com um toque.
+            video.controls = true;
+          });
+        }
+      }
+
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              tryPlayback();
+            } else {
+              video.pause();
+            }
+          });
+        }, { threshold: 0.15 });
+        observer.observe(video);
+      } else {
+        tryPlayback();
+      }
+    });
+  });
+</script>
+
+    <script src="js/config.js">
                                                                                                                                                                                                                                       </script>
                                                                                                                                                                                                                                       <script src="js/script.js">
                                                                                                                                                                                                                                       </script>
