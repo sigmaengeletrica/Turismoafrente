@@ -82,3 +82,20 @@ body.offer-modal-open{overflow:hidden}
 .offer-tile-image>.offer-badge{position:relative;z-index:1}
 .offer-modal-hero{background-repeat:no-repeat;background-size:cover;background-position:center}
 .offer-modal-hero .offer-badge{position:relative}
+
+
+/* Rodapé de contato restaurado */
+.site-footer{margin-top:70px;background:#062b4b;color:#fff}
+.footer-main{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:36px;padding-top:42px;padding-bottom:42px}
+.footer-brand p{max-width:300px;color:#d1e0ec;font-size:14px;line-height:1.7}
+.footer-logo{display:inline-block;color:#fff;text-decoration:none;font:800 24px/1.2 Manrope,Arial,sans-serif}
+.footer-logo strong{color:#ffad56}
+.footer-contact,.footer-social{display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+.footer-contact h2,.footer-social h2{margin:0 0 4px;font:800 16px Manrope,Arial,sans-serif;color:#fff}
+.footer-contact a,.footer-group-link{color:#e0edf7;text-decoration:none;font-size:14px;overflow-wrap:anywhere}
+.footer-contact a:hover,.footer-group-link:hover{color:#ffad56}
+.site-footer .instagram-link{color:#fff}
+.footer-group-link{display:inline-block;margin-top:3px}
+.footer-bottom{border-top:1px solid #ffffff24;background:#04233d}
+.footer-bottom-inner{display:flex;justify-content:space-between;gap:16px;padding-top:16px;padding-bottom:16px;color:#bfd0df;font-size:12px}
+@media(max-width:760px){.footer-main{grid-template-columns:1fr;gap:28px;padding-top:34px;padding-bottom:34px}.footer-bottom-inner{flex-direction:column;gap:7px}}
