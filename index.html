@@ -54,6 +54,45 @@
                                               </div>
                                             </div>
                                           </section>
+
+<!-- CARROSSEL DE OFERTAS: cartões compactos que abrem os detalhes da promoção -->
+<section class="section wrap special-offers" id="ofertas-especiais">
+  <div class="section-head">
+    <div>
+      <p class="eyebrow">OFERTAS SELECIONADAS</p>
+      <h2>Encontre sua próxima viagem</h2>
+      <p>Explore nossas promoções e abra uma oferta para ver todos os detalhes.</p>
+    </div>
+  </div>
+
+  <div class="offer-carousel" aria-label="Carrossel de ofertas">
+    <button class="carousel-arrow carousel-prev" type="button" aria-label="Oferta anterior">‹</button>
+    <div class="offer-track" id="offer-track">
+      <button class="offer-tile" type="button" data-offer-open="itacare">
+        <span class="offer-tile-image itacare-image"><span class="offer-badge">🚨 IMPERDÍVEL</span></span>
+        <span class="offer-tile-copy">
+          <small>BAHIA · NATAL 2026</small>
+          <strong>Natal em Itacaré</strong>
+          <span>19 a 25 de dezembro · 6 noites</span>
+          <b>A partir de R$ 3.230,31 <small>por pessoa</small></b>
+          <span class="offer-tile-cta">Ver promoção →</span>
+        </span>
+      </button>
+
+      <button class="offer-tile offer-coming-soon" type="button" disabled>
+        <span class="offer-tile-image inspiration-image"><span class="offer-badge">EM BREVE</span></span>
+        <span class="offer-tile-copy">
+          <small>NOVAS EXPERIÊNCIAS</small>
+          <strong>Novos destinos em breve</strong>
+          <span>Estamos preparando outras ofertas para você.</span>
+          <span class="offer-tile-cta">Acompanhe as novidades →</span>
+        </span>
+      </button>
+    </div>
+    <button class="carousel-arrow carousel-next" type="button" aria-label="Próxima oferta">›</button>
+  </div>
+</section>
+
                                           <!-- FORMULÁRIO DE COTAÇÃO: organiza os dados; não consulta tarifas em tempo real -->
                                           <section class="search wrap" id="voos">
                                             <div class="section-head">
@@ -255,43 +294,7 @@
 
 <!-- OFERTA ESPECIAL: pacote de Natal em Itacaré -->
 
-<!-- CARROSSEL DE OFERTAS: cartões compactos que abrem os detalhes da promoção -->
-<section class="section wrap special-offers" id="ofertas-especiais">
-  <div class="section-head">
-    <div>
-      <p class="eyebrow">OFERTAS SELECIONADAS</p>
-      <h2>Encontre sua próxima viagem</h2>
-      <p>Explore nossas promoções e abra uma oferta para ver todos os detalhes.</p>
-    </div>
-  </div>
 
-  <div class="offer-carousel" aria-label="Carrossel de ofertas">
-    <button class="carousel-arrow carousel-prev" type="button" aria-label="Oferta anterior">‹</button>
-    <div class="offer-track" id="offer-track">
-      <button class="offer-tile" type="button" data-offer-open="itacare">
-        <span class="offer-tile-image itacare-image"><span class="offer-badge">🚨 IMPERDÍVEL</span></span>
-        <span class="offer-tile-copy">
-          <small>BAHIA · NATAL 2026</small>
-          <strong>Natal em Itacaré</strong>
-          <span>19 a 25 de dezembro · 6 noites</span>
-          <b>A partir de R$ 3.230,31 <small>por pessoa</small></b>
-          <span class="offer-tile-cta">Ver promoção →</span>
-        </span>
-      </button>
-
-      <button class="offer-tile offer-coming-soon" type="button" disabled>
-        <span class="offer-tile-image inspiration-image"><span class="offer-badge">EM BREVE</span></span>
-        <span class="offer-tile-copy">
-          <small>NOVAS EXPERIÊNCIAS</small>
-          <strong>Novos destinos em breve</strong>
-          <span>Estamos preparando outras ofertas para você.</span>
-          <span class="offer-tile-cta">Acompanhe as novidades →</span>
-        </span>
-      </button>
-    </div>
-    <button class="carousel-arrow carousel-next" type="button" aria-label="Próxima oferta">›</button>
-  </div>
-</section>
 
 <!-- MODAL: detalhes completos da promoção selecionada -->
 <div class="offer-modal" id="offer-modal" hidden>
