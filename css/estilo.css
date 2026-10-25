@@ -75,3 +75,10 @@ body.offer-modal-open{overflow:hidden}
   .offer-modal-content .hotel-price{align-items:flex-start}
   .offer-modal-content .hotel-actions .btn{white-space:normal;text-align:center}
 }
+
+/* Imagens das capas das ofertas */
+.offer-tile-image{position:relative;overflow:hidden}
+.offer-tile-image>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.offer-tile-image>.offer-badge{position:relative;z-index:1}
+.offer-modal-hero{background-repeat:no-repeat;background-size:cover;background-position:center}
+.offer-modal-hero .offer-badge{position:relative}
