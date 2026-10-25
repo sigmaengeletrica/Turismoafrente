@@ -9,3 +9,46 @@
 .dest-video{z-index:0}
 .dest:after{z-index:1;pointer-events:none}
 .dest>span{z-index:2}
+
+
+/* Redes sociais no rodapé */
+.footer-social{display:flex;align-items:center;gap:12px}
+.instagram-link{display:inline-flex;align-items:center;gap:9px;color:#fff;font-weight:700;font-size:13px}
+.instagram-link svg{width:25px;height:25px;flex:0 0 25px}
+.instagram-link:hover{color:#ffad56}
+
+/* Pacote promocional em destaque */
+.special-offers{padding-top:35px}
+.package-card{overflow:hidden;border:1px solid var(--line);border-radius:20px;background:#fff;box-shadow:0 14px 36px #0b2d7712}
+.package-banner{padding:30px clamp(20px,4vw,46px);color:#fff;background:linear-gradient(120deg,#073461,#0c6791 65%,#159b8b)}
+.package-badge{display:inline-block;padding:6px 11px;border-radius:20px;background:#ff7900;color:#fff;font-size:11px;font-weight:800;letter-spacing:.8px}
+.package-dates{margin:16px 0 5px;font-weight:700;color:#d8efff}
+.package-banner h3{font:800 clamp(28px,4vw,40px)/1.12 Manrope;margin:0 0 8px}
+.package-banner>p:last-child{margin:0;color:#e5f4ff}
+.package-content{padding:clamp(20px,4vw,38px)}
+.package-content h4{font:800 18px Manrope;margin:0 0 13px;color:var(--blue)}
+.package-inclusions{display:grid;grid-template-columns:1fr 1fr;gap:10px 24px;list-style:none;margin:0 0 30px;padding:0}
+.package-inclusions li{font-size:14px;color:#40556b}
+.package-price-heading{padding-top:8px}
+.hotel-prices{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.hotel-price{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:16px;border:1px solid var(--line);border-radius:13px;background:#fbfdff}
+.hotel-price h5{font:700 15px Manrope;margin:0 0 5px}
+.hotel-price strong{display:block;color:#087944;font:800 21px Manrope}
+.hotel-price small{display:block;margin-top:3px;color:var(--muted);font-size:11px}
+.hotel-actions{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.hotel-actions .btn{padding:9px 13px;font-size:12px}
+.hotel-link{font-size:12px;color:var(--blue);font-weight:700;white-space:nowrap}
+.hotel-link:hover{text-decoration:underline}
+.package-disclaimer{margin:20px 0;color:var(--muted);font-size:12px}
+.package-group-cta{margin-top:5px}
+.floating-group{right:20px;bottom:84px;background:#086c9b;width:52px;height:52px}
+.floating-group svg{width:30px;height:30px}
+.floating-label{position:absolute;right:60px;white-space:nowrap;background:#06294c;color:white;padding:7px 10px;border-radius:8px;font-size:11px;font-weight:700;opacity:0;pointer-events:none;transition:opacity .2s}
+.floating-group:hover .floating-label,.floating-group:focus-visible .floating-label{opacity:1}
+@media(max-width:760px){
+  .package-inclusions,.hotel-prices{grid-template-columns:1fr}
+  .hotel-price{align-items:flex-start}
+  .hotel-actions .btn{padding:9px 12px}
+  .floating-group{right:16px;bottom:82px}
+  .floating-label{display:none}
+}
