@@ -32,9 +32,9 @@
                             <!-- CONTEÚDO PRINCIPAL -->
                             <!-- DESTAQUE INICIAL: vídeo de fundo e chamada principal -->
                             <section class="hero" id="inicio">
-                              <video autoplay muted loop playsinline webkit-playsinline preload="auto" poster="imagens/capas/banner-principal.svg">
+                              <video autoplay muted loop playsinline webkit-playsinline preload="metadata" poster="imagens/capas/banner-principal.svg" poster="imagens/capas/banner-principal.svg">
                 <source src="videos/video3.mp4" type="video/mp4">
-                              </video>
+              </video>
                               <div class="shade">
                               </div>
                               <div class="hero-copy wrap">
@@ -187,8 +187,8 @@
                                                                                                                                       <!-- VÍDEO 1: atrações internacionais -->
                                                                                                                                       <section class="video-row" id="experiencias">
                                                                                                                                         <div class="video">
-                                                                                                                                          <video autoplay muted loop playsinline webkit-playsinline preload="auto" poster="imagens/capas/internacionais.svg">
-                <source src="videos/video1.mp4" type="video/mp4">
+                                                                                                                                          <video autoplay muted loop playsinline preload="none" poster="imagens/capas/internacionais.svg">
+                                                                                                                                            <source src="videos/video1.mp4" type="video/mp4">
                                                                                                                                           </video>
                                                                                                                                         </div>
                                                                                                                                         <div class="video-copy">
@@ -201,8 +201,8 @@
                                                                                                                                               <!-- VÍDEO 2: atrações brasileiras -->
                                                                                                                                               <section class="video-row reverse">
                                                                                                                                                 <div class="video">
-                                                                                                                                                  <video autoplay muted loop playsinline webkit-playsinline preload="auto" poster="imagens/capas/brasil.svg">
-                <source src="videos/video2.mp4" type="video/mp4">
+                                                                                                                                                  <video autoplay muted loop playsinline preload="none" poster="imagens/capas/brasil.svg">
+                                                                                                                                                    <source src="videos/video2.mp4" type="video/mp4">
                                                                                                                                                   </video>
                                                                                                                                                 </div>
                                                                                                                                                 <div class="video-copy">
@@ -228,8 +228,8 @@
                                                                                                                                                               </section>
                                                                                                                                                               <!-- VÍDEO 4: meios de transporte -->
                                                                                                                                                               <section class="transport">
-                                                                                                                                                                <video autoplay muted loop playsinline webkit-playsinline preload="auto" poster="imagens/capas/transportes.svg">
-                <source src="videos/video4.mp4" type="video/mp4">
+                                                                                                                                                                <video autoplay muted loop playsinline preload="none" poster="imagens/capas/transportes.svg">
+                                                                                                                                                                  <source src="videos/video4.mp4" type="video/mp4">
                                                                                                                                                                 </video>
                                                                                                                                                                 <div class="transport-shade">
                                                                                                                                                                 </div>
@@ -328,45 +328,24 @@
                                                                                                                                                                                                                                       <!-- CONFIGURAÇÕES e funções JavaScript -->
                                                                                                                                                                                                                                   
 <script>
-  // Compatibilidade dos quatro vídeos de experiências com Safari/iPhone.
   document.addEventListener("DOMContentLoaded", function () {
-    const videos = document.querySelectorAll(
-      '.video-row video, .transport > video'
-    );
+    const heroVideo = document.querySelector('.hero > video');
+    if (!heroVideo) return;
 
-    videos.forEach(function (video) {
-      video.muted = true;
-      video.defaultMuted = true;
-      video.playsInline = true;
-      video.setAttribute('muted', '');
-      video.setAttribute('playsinline', '');
-      video.setAttribute('webkit-playsinline', '');
+    heroVideo.muted = true;
+    heroVideo.defaultMuted = true;
+    heroVideo.playsInline = true;
+    heroVideo.setAttribute('muted', '');
+    heroVideo.setAttribute('playsinline', '');
+    heroVideo.setAttribute('webkit-playsinline', '');
 
-      function tryPlayback() {
-        const result = video.play();
-        if (result && typeof result.catch === 'function') {
-          result.catch(function () {
-            // Se o iPhone bloquear autoplay, permite iniciar com um toque.
-            video.controls = true;
-          });
-        }
-      }
-
-      if ('IntersectionObserver' in window) {
-        const observer = new IntersectionObserver(function (entries) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-              tryPlayback();
-            } else {
-              video.pause();
-            }
-          });
-        }, { threshold: 0.15 });
-        observer.observe(video);
-      } else {
-        tryPlayback();
-      }
-    });
+    const attempt = heroVideo.play();
+    if (attempt && typeof attempt.catch === 'function') {
+      attempt.catch(function () {
+        // Keep the poster visible if iPhone Safari blocks autoplay.
+        heroVideo.pause();
+      });
+    }
   });
 </script>
 
