@@ -32,7 +32,7 @@
                             <!-- CONTEÚDO PRINCIPAL -->
                             <!-- DESTAQUE INICIAL: vídeo de fundo e chamada principal -->
                             <section class="hero" id="inicio">
-                              <video autoplay muted loop playsinline webkit-playsinline preload="metadata" poster="imagens/capas/banner-principal.svg" poster="imagens/capas/banner-principal.svg">
+                              <video autoplay muted loop playsinline webkit-playsinline preload="metadata" poster="imagens/capas/banner-principal.svg">
                 <source src="videos/video3.mp4" type="video/mp4">
               </video>
                               <div class="shade">
@@ -187,7 +187,7 @@
                                                                                                                                       <!-- VÍDEO 1: atrações internacionais -->
                                                                                                                                       <section class="video-row" id="experiencias">
                                                                                                                                         <div class="video">
-                                                                                                                                          <video autoplay muted loop playsinline preload="none" poster="imagens/capas/internacionais.svg">
+                                                                                                                                          <video autoplay muted loop playsinline preload="metadata" poster="imagens/capas/internacionais.svg">
                                                                                                                                             <source src="videos/video1.mp4" type="video/mp4">
                                                                                                                                           </video>
                                                                                                                                         </div>
@@ -201,7 +201,7 @@
                                                                                                                                               <!-- VÍDEO 2: atrações brasileiras -->
                                                                                                                                               <section class="video-row reverse">
                                                                                                                                                 <div class="video">
-                                                                                                                                                  <video autoplay muted loop playsinline preload="none" poster="imagens/capas/brasil.svg">
+                                                                                                                                                  <video autoplay muted loop playsinline preload="metadata" poster="imagens/capas/brasil.svg">
                                                                                                                                                     <source src="videos/video2.mp4" type="video/mp4">
                                                                                                                                                   </video>
                                                                                                                                                 </div>
@@ -215,7 +215,7 @@
                                                                                                                                                       <!-- VÍDEO 3: destinos paradisíacos -->
                                                                                                                                                       <section class="video-row">
                                                                                                                                                         <div class="video">
-                                                                                                                                                          <video autoplay muted loop playsinline preload="none" poster="imagens/capas/paradisiacos.svg">
+                                                                                                                                                          <video autoplay muted loop playsinline preload="metadata" poster="imagens/capas/paradisiacos.svg">
                                                                                                                                                             <source src="videos/video3.mp4" type="video/mp4">
                                                                                                                                                           </video>
                                                                                                                                                         </div>
@@ -228,7 +228,7 @@
                                                                                                                                                               </section>
                                                                                                                                                               <!-- VÍDEO 4: meios de transporte -->
                                                                                                                                                               <section class="transport">
-                                                                                                                                                                <video autoplay muted loop playsinline preload="none" poster="imagens/capas/transportes.svg">
+                                                                                                                                                                <video autoplay muted loop playsinline preload="metadata" poster="imagens/capas/transportes.svg">
                                                                                                                                                                   <source src="videos/video4.mp4" type="video/mp4">
                                                                                                                                                                 </video>
                                                                                                                                                                 <div class="transport-shade">
@@ -329,22 +329,64 @@
                                                                                                                                                                                                                                   
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    const heroVideo = document.querySelector('.hero > video');
-    if (!heroVideo) return;
+    const videos = Array.from(document.querySelectorAll("video"));
 
-    heroVideo.muted = true;
-    heroVideo.defaultMuted = true;
-    heroVideo.playsInline = true;
-    heroVideo.setAttribute('muted', '');
-    heroVideo.setAttribute('playsinline', '');
-    heroVideo.setAttribute('webkit-playsinline', '');
+    videos.forEach(function (video) {
+      video.muted = true;
+      video.defaultMuted = true;
+      video.playsInline = true;
+      video.setAttribute("muted", "");
+      video.setAttribute("playsinline", "");
+      video.setAttribute("webkit-playsinline", "");
+    });
 
-    const attempt = heroVideo.play();
-    if (attempt && typeof attempt.catch === 'function') {
-      attempt.catch(function () {
-        // Keep the poster visible if iPhone Safari blocks autoplay.
-        heroVideo.pause();
+    function playVideo(video) {
+      video.muted = true;
+      const promise = video.play();
+      if (promise && typeof promise.catch === "function") {
+        promise.catch(function () {
+          // O Safari pode bloquear autoplay por economia de bateria ou dados.
+        });
+      }
+    }
+
+    const videosToManage = videos.filter(function (video) {
+      return !video.closest(".hero");
+    });
+
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          const video = entry.target;
+          if (entry.isIntersecting) {
+            video.load();
+            playVideo(video);
+          } else {
+            video.pause();
+          }
+        });
+      }, { rootMargin: "120px 0px", threshold: 0.15 });
+
+      videosToManage.forEach(function (video) {
+        observer.observe(video);
       });
+    } else {
+      videosToManage.forEach(function (video) {
+        video.load();
+        playVideo(video);
+      });
+    }
+
+    // Mantém o banner principal funcionando como antes.
+    const heroVideo = document.querySelector(".hero > video");
+    if (heroVideo) {
+      heroVideo.muted = true;
+      heroVideo.defaultMuted = true;
+      heroVideo.playsInline = true;
+      heroVideo.setAttribute("muted", "");
+      heroVideo.setAttribute("playsinline", "");
+      heroVideo.setAttribute("webkit-playsinline", "");
+      playVideo(heroVideo);
     }
   });
 </script>
