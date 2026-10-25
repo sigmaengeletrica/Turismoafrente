@@ -254,23 +254,58 @@
                                                                                                                                                                               </section>
 
 <!-- OFERTA ESPECIAL: pacote de Natal em Itacaré -->
+
+<!-- CARROSSEL DE OFERTAS: cartões compactos que abrem os detalhes da promoção -->
 <section class="section wrap special-offers" id="ofertas-especiais">
   <div class="section-head">
     <div>
-      <p class="eyebrow">OFERTA EM DESTAQUE</p>
-      <h2>🎄 Natal em Itacaré — Bahia</h2>
-      <p>Uma viagem especial para fechar o ano com praia, descanso e novas experiências.</p>
+      <p class="eyebrow">OFERTAS SELECIONADAS</p>
+      <h2>Encontre sua próxima viagem</h2>
+      <p>Explore nossas promoções e abra uma oferta para ver todos os detalhes.</p>
     </div>
   </div>
-  <article class="package-card">
-    <div class="package-banner">
-      <span class="package-badge">🚨 IMPERDÍVEL</span>
-      <p class="package-dates">19 a 25 de dezembro de 2026</p>
-      <h3>Itacaré espera por você</h3>
-      <p>Passagem aérea + transfer + hospedagem + café da manhã</p>
+
+  <div class="offer-carousel" aria-label="Carrossel de ofertas">
+    <button class="carousel-arrow carousel-prev" type="button" aria-label="Oferta anterior">‹</button>
+    <div class="offer-track" id="offer-track">
+      <button class="offer-tile" type="button" data-offer-open="itacare">
+        <span class="offer-tile-image itacare-image"><span class="offer-badge">🚨 IMPERDÍVEL</span></span>
+        <span class="offer-tile-copy">
+          <small>BAHIA · NATAL 2026</small>
+          <strong>Natal em Itacaré</strong>
+          <span>19 a 25 de dezembro · 6 noites</span>
+          <b>A partir de R$ 3.230,31 <small>por pessoa</small></b>
+          <span class="offer-tile-cta">Ver promoção →</span>
+        </span>
+      </button>
+
+      <button class="offer-tile offer-coming-soon" type="button" disabled>
+        <span class="offer-tile-image inspiration-image"><span class="offer-badge">EM BREVE</span></span>
+        <span class="offer-tile-copy">
+          <small>NOVAS EXPERIÊNCIAS</small>
+          <strong>Novos destinos em breve</strong>
+          <span>Estamos preparando outras ofertas para você.</span>
+          <span class="offer-tile-cta">Acompanhe as novidades →</span>
+        </span>
+      </button>
     </div>
-    <div class="package-content">
-      <h4>O pacote inclui</h4>
+    <button class="carousel-arrow carousel-next" type="button" aria-label="Próxima oferta">›</button>
+  </div>
+</section>
+
+<!-- MODAL: detalhes completos da promoção selecionada -->
+<div class="offer-modal" id="offer-modal" hidden>
+  <div class="offer-modal-backdrop" data-offer-close></div>
+  <section class="offer-dialog" role="dialog" aria-modal="true" aria-labelledby="offer-modal-title">
+    <button class="offer-modal-close" type="button" aria-label="Fechar promoção" data-offer-close>×</button>
+    <div class="offer-modal-hero">
+      <span class="offer-badge">🚨 IMPERDÍVEL</span>
+      <p>BAHIA · NATAL 2026</p>
+      <h2 id="offer-modal-title">Natal em Itacaré</h2>
+      <strong>19 a 25 de dezembro de 2026 · 6 noites</strong>
+    </div>
+    <div class="offer-modal-content">
+      <h3>O pacote inclui</h3>
       <ul class="package-inclusions">
         <li>✈️ Passagem aérea de ida e volta: Porto Alegre (POA) ⇄ Ilhéus (IOS)</li>
         <li>🕐 Ida às 10h25, chegada às 15h40 — 1 conexão</li>
@@ -280,42 +315,42 @@
         <li>🏨 6 noites de hospedagem em Itacaré</li>
         <li>☕ Café da manhã</li>
       </ul>
-      <h4 class="package-price-heading">Escolha sua hospedagem</h4>
+      <h3>Escolha sua hospedagem</h3>
       <div class="hotel-prices">
         <article class="hotel-price">
-          <div><h5>Pousada Villa N'Kara</h5><strong>R$ 3.230,31</strong><small>por pessoa · quarto duplo</small></div>
+          <div><h4>Pousada Villa N'Kara</h4><strong>R$ 3.230,31</strong><small>por pessoa · quarto duplo</small></div>
           <div class="hotel-actions">
             <a class="hotel-link" href="https://www.villanakara.com/" target="_blank" rel="noopener noreferrer">Conhecer pousada ↗</a>
-            <a class="btn green package-whatsapp" data-hotel="Pousada Villa N'Kara" data-price="R$ 3.230,31" href="https://wa.me/5554991503391" target="_blank" rel="noopener noreferrer">Consultar</a>
+            <a class="btn green package-whatsapp" data-hotel="Pousada Villa N'Kara" data-price="R$ 3.230,31" href="https://wa.me/5554991503391" target="_blank" rel="noopener noreferrer">Consultar no WhatsApp</a>
           </div>
         </article>
         <article class="hotel-price">
-          <div><h5>Pousada Abare</h5><strong>R$ 3.323,68</strong><small>por pessoa · quarto duplo</small></div>
+          <div><h4>Pousada Abare</h4><strong>R$ 3.323,68</strong><small>por pessoa · quarto duplo</small></div>
           <div class="hotel-actions">
             <a class="hotel-link" href="https://www.pousadaabare.com.br/" target="_blank" rel="noopener noreferrer">Conhecer pousada ↗</a>
-            <a class="btn green package-whatsapp" data-hotel="Pousada Abare" data-price="R$ 3.323,68" href="https://wa.me/5554991503391" target="_blank" rel="noopener noreferrer">Consultar</a>
+            <a class="btn green package-whatsapp" data-hotel="Pousada Abare" data-price="R$ 3.323,68" href="https://wa.me/5554991503391" target="_blank" rel="noopener noreferrer">Consultar no WhatsApp</a>
           </div>
         </article>
         <article class="hotel-price">
-          <div><h5>Pousada Pedra Torta</h5><strong>R$ 3.809,56</strong><small>por pessoa · quarto duplo</small></div>
+          <div><h4>Pousada Pedra Torta</h4><strong>R$ 3.809,56</strong><small>por pessoa · quarto duplo</small></div>
           <div class="hotel-actions">
             <a class="hotel-link" href="https://pousadapedratorta.com.br/" target="_blank" rel="noopener noreferrer">Conhecer pousada ↗</a>
-            <a class="btn green package-whatsapp" data-hotel="Pousada Pedra Torta" data-price="R$ 3.809,56" href="https://wa.me/5554991503391" target="_blank" rel="noopener noreferrer">Consultar</a>
+            <a class="btn green package-whatsapp" data-hotel="Pousada Pedra Torta" data-price="R$ 3.809,56" href="https://wa.me/5554991503391" target="_blank" rel="noopener noreferrer">Consultar no WhatsApp</a>
           </div>
         </article>
         <article class="hotel-price">
-          <div><h5>Ecoporan Hotel Charme Spa e Eventos</h5><strong>R$ 4.062,72</strong><small>por pessoa · quarto duplo</small></div>
+          <div><h4>Ecoporan Hotel Charme Spa e Eventos</h4><strong>R$ 4.062,72</strong><small>por pessoa · quarto duplo</small></div>
           <div class="hotel-actions">
             <a class="hotel-link" href="https://ecoporanhotel.com/" target="_blank" rel="noopener noreferrer">Conhecer hotel ↗</a>
-            <a class="btn green package-whatsapp" data-hotel="Ecoporan Hotel Charme Spa e Eventos" data-price="R$ 4.062,72" href="https://wa.me/5554991503391" target="_blank" rel="noopener noreferrer">Consultar</a>
+            <a class="btn green package-whatsapp" data-hotel="Ecoporan Hotel Charme Spa e Eventos" data-price="R$ 4.062,72" href="https://wa.me/5554991503391" target="_blank" rel="noopener noreferrer">Consultar no WhatsApp</a>
           </div>
         </article>
       </div>
       <p class="package-disclaimer">Valores por pessoa em quarto duplo, sujeitos a alteração e disponibilidade sem aviso prévio. Consulte a agência para confirmar tarifa, disponibilidade e condições antes de contratar.</p>
-      <a class="btn orange package-group-cta" href="https://chat.whatsapp.com/LPDgkIxmQjp2At2816eUi0" target="_blank" rel="noopener noreferrer">Receber outras promoções no grupo →</a>
     </div>
-  </article>
-</section>
+  </section>
+</div>
+
                                                                                                                                                                               <!-- BENEFÍCIOS da agência -->
                                                                                                                                                                               <section class="section wrap benefits" id="sobre">
                                                                                                                                                                                 <div class="section-head centered">
@@ -402,13 +437,6 @@
   </svg>
 </a>
                                                                                                                                                                                                                                       
-<a class="floating floating-group" href="https://chat.whatsapp.com/LPDgkIxmQjp2At2816eUi0" target="_blank" rel="noopener noreferrer" aria-label="Entrar no grupo de promoções da Turismo a Frente" title="Grupo de promoções">
-  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-    <path fill="currentColor" d="M12 3a8.5 8.5 0 0 0-7.32 12.82L4 20l4.32-1.13A8.5 8.5 0 1 0 12 3Zm0 15.2a6.65 6.65 0 0 1-3.38-.92l-.24-.14-2.51.66.67-2.43-.16-.25A6.6 6.6 0 1 1 12 18.2Zm3.64-4.95c-.2-.1-1.18-.58-1.36-.65-.18-.07-.31-.1-.44.1-.13.2-.5.65-.61.78-.11.13-.23.15-.43.05-.2-.1-.85-.31-1.62-.98-.6-.53-1-1.17-1.12-1.37-.12-.2-.01-.3.09-.4.09-.09.2-.23.3-.34.1-.12.13-.2.2-.33.06-.13.03-.24-.02-.34-.05-.1-.44-1.08-.6-1.48-.16-.39-.32-.33-.44-.34h-.38c-.13 0-.34.05-.52.25-.18.2-.68.67-.68 1.64s.7 1.89.8 2.02c.1.13 1.38 2.1 3.33 2.94.47.2.83.33 1.12.42.47.15.9.13 1.24.08.38-.06 1.2-.49 1.37-.96.17-.47.17-.88.12-.96-.05-.08-.18-.13-.38-.23Z"/>
-  </svg>
-  <span class="floating-label">Grupo de ofertas</span>
-</a>
-
 <!-- CONFIGURAÇÕES e funções JavaScript -->
                                                                                                                                                                                                                                   
 <script>
